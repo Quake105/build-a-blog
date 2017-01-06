@@ -42,10 +42,22 @@ class Art(db.Model):
     art = db.TextProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
 
-class MainHandler(Handler):
+
+## inserted Limit 5 11/12/2016
+class BlogHandler(Handler):
+    def render_blogpost(self):
+        arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC LIMIT 5")
+
+        self.render("blogpost.html",   arts = arts)
+#title=title,
+#art=art,
+    def get(self):
+        self.render_blogpost()
+
+class NewPost(Handler):
     def render_front(self, title="", art="", error=""):
-        arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
-        self.render("frontpage.html", title=title, art=art, error=error, arts = arts)
+
+        self.render("frontpage.html", title=title, art=art, error=error)
 
     def get(self):
         self.render_front()
@@ -55,14 +67,42 @@ class MainHandler(Handler):
         art = self.request.get("art")
 
         if title and art:
+
             a = Art(title = title, art = art)
             a.put()
 
-            self.redirect("/")
+            self.redirect("/blog/%s" % str(a.key().id()))
         else:
-            error = "we need both a title and some artwork!"
+            error = "Please add a Title and some Content"
             self.render_front(error = error, title = title, art = art)
 
+class ViewPostHandler(Handler):
+    def render_viewPost(self,id):
+
+        #arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
+        arts = Art.get_by_id (int(id),parent=None)
+        #arts = db.GqlQuery("SELECT * FROM Art WHERE id = :id ", id)
+        self.render("singleblogpost.html",   arts = arts)
+
+
+    def get(self,id):
+        self.render_viewPost(id)
+
+
+class MainHandler(Handler):
+    def render_front(self):
+        #arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
+        self.render("blogpost.html")
+
+    def get(self):
+        self.render_front()
+
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    webapp2.Route('/', MainHandler),
+    webapp2.Route('/blog', BlogHandler) ,
+    webapp2.Route('/blog/newpost', NewPost),
+    webapp2.Route('/blog/<id:\d+>', ViewPostHandler)
+
 ], debug=True)
+#('/blog/<id:\d+>', ViewPostHandler)

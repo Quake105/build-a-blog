@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Blogz!</title>
-<meta http-equiv="Content-Language" content="English" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" href="styledit.css" media="screen" />
-</head>
-
-<style type="text/css">
 * {
     padding: 0;
     margin: 0;
-}
+} 
 
 body {
 background: #fff url(images/bg.jpg) repeat-x;
 font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 15px;
+font-size: 11px;
 line-height: 18px;
 color: #333333;;
 }
@@ -30,15 +20,9 @@ margin: 0 auto;
 width: 800px;
 }
 
-#header {
-height: 75px;
+#header { 
+height: 60px;
 background: #26478A url(images/header.jpg) no-repeat;
-}
-#header1 {
-height: 7px;
-background: white;
-margin-top: 5px;
-margin-left: 10px;
 }
  h1 {
 font-size: 26px;
@@ -60,7 +44,7 @@ font-size: 15px;
 font-weight: 100;
 padding: 0 0 0 11px;
 letter-spacing: -1px;
-
+line-height: 12px;
 }
 
 #intro {
@@ -86,9 +70,6 @@ font-weight: 100;
 padding : 10px 0 15px 0;
 }
 
-.error{
-    color: red;
-}
 .right {
 width: 150px;
 float: right;
@@ -117,85 +98,3 @@ font-size: 11px;
 padding: 0 0 10px 0;
 margin-top: 20px;
 }
-
-input[type=text] {
-        width: 550px;
-        height: 19px;
-        padding: 2px;
-        font-size: 15px;
-}
-
-
-textarea {
-    width: 800px;
-    height: 300px;
-    font-size: 17px;
-    font-family: monospace;
-}
-input[type=submit] {
-    width: 75px;
-    height: 20px;
-    font-size: 15px;
-}
-pre{
-    margin-right: 200px
-    padding: 200px;
-}
-hr {
-    margin: 20px auto:
-}
-
-.art + .art {
-
-    margin-top: 20px;
-
-}
-
-
-.art-title {
-    margin-left: 20px;
-    font-weight: bold;
-    font-size: 20px;
-}
-.art-body {
-    width: 100px;
-    padding-right: 300px;
-    margin-left: 70px;
-    margin-right: 500px;
-    font-size: 17px;
-}
-
-</style>
-
-<body>
-
-<div id="wrap">
-
-<div id="header">
-
-<h1><a href="/blog">Blog!</a></h1>
-</div>
-
-<div id="header1">
-<h4 color: #FF4800><a href="/blog/newpost">New Post</a></h4>
-</div>
-
-<br>
-<hr>
-<br>
-<br>
-
-{% block content %}
-{% endblock %}
-
-<br>
-<br>
-<hr>
-<div id="footer">
-    <div id="header">
-    </div>
-    </div>
-</div>
-
-</body>
-</html>
